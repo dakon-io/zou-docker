@@ -27,6 +27,7 @@ ENV DOMAIN_PROTOCOL        https
 RUN apk add --no-cache \
     bash \
     git \
+    nginx \
     supervisor \
     ffmpeg \
     python3 \
@@ -48,13 +49,16 @@ WORKDIR /opt/zou
 ADD zou /opt/zou/
 RUN pip3 install -r requirements.txt --no-cache-dir
 
+# setup nginx
+ADD nginx.conf /etc/nginx/conf.d/default.conf
+
 # setup supervisor
 RUN mkdir -p  /var/log/zou
 ADD supervisord.conf /etc/supervisord.conf
 ADD gunicorn /etc/zou/gunicorn.conf
 ADD gunicorn-events /etc/zou/gunicorn-events.conf
 
-EXPOSE 5000 5001
+EXPOSE 80
 COPY start_zou.sh /opt/zou/
 
 # NOTE: This shell out is needed to avoid RQD getting PID 0 which leads to leaking child processes.
