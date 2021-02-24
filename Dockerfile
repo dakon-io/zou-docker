@@ -1,8 +1,6 @@
 FROM alpine:latest
 
-ENV MODE                   web
-ENV PORT                   5000
-ENV WORKER                 5
+ENV WORKERS                3
 ENV TIMEOUT                60
 ENV DB_HOST                localhost
 ENV DB_PORT                5432
@@ -29,6 +27,7 @@ ENV DOMAIN_PROTOCOL        https
 RUN apk add --no-cache \
     bash \
     git \
+    supervisor \
     ffmpeg \
     python3 \
     py-pip \
@@ -44,11 +43,19 @@ RUN apk add --no-cache \
     libffi-dev \
     zlib-dev
 
+# build zou
 WORKDIR /opt/zou
 ADD zou /opt/zou/
 RUN pip3 install -r requirements.txt --no-cache-dir
 
-EXPOSE ${PORT}
-COPY startup.sh ./startup.sh
+# setup supervisor
+RUN mkdir -p  /var/log/zou
+ADD supervisord.conf /etc/supervisord.conf
+ADD gunicorn /etc/zou/gunicorn.conf
+ADD gunicorn-events /etc/zou/gunicorn-events.conf
+
+EXPOSE 5000 5001
+COPY start_zou.sh /opt/zou/
+
 # NOTE: This shell out is needed to avoid RQD getting PID 0 which leads to leaking child processes.
-ENTRYPOINT ["./startup.sh"]
+ENTRYPOINT ["./start_zou.sh"]
