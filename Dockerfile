@@ -45,12 +45,14 @@ RUN apk add --no-cache \
     zlib-dev
 
 # build zou
+RUN mkdir -p /run/zou
 WORKDIR /opt/zou
 ADD zou /opt/zou/
 RUN pip3 install -r requirements.txt --no-cache-dir
 
 # setup nginx
-ADD nginx.conf /etc/nginx/conf.d/default.conf
+RUN mkdir -p /run/nginx
+ADD nginx.conf /etc/nginx/http.d/default.conf
 
 # setup supervisor
 RUN mkdir -p  /var/log/zou
