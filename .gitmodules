@@ -1,0 +1,3 @@
+[submodule "zou"]
+	path = zou
+	url = git@github.com:dakon-io/zou.git
