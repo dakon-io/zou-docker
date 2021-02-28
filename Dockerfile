@@ -23,6 +23,7 @@ ENV MAIL_USE_SSL           True
 ENV MAIL_DEFAULT_SENDER    NULL
 ENV DOMAIN_NAME            localhost
 ENV DOMAIN_PROTOCOL        https
+ENV ENABLE_JOB_QUEUE       True
 
 RUN apk add --no-cache \
     bash \
