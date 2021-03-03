@@ -55,6 +55,8 @@ RUN pip3 install -r requirements.txt --no-cache-dir
 # setup nginx
 RUN mkdir -p /run/nginx
 ADD nginx.conf /etc/nginx/http.d/default.conf
+# Reference: https://docs.gunicorn.org/en/0.16.1/deploy.html
+RUN sed -i "s/worker_processes .*/worker_processes 1;/g" /etc/nginx/nginx.conf
 
 # setup supervisor
 RUN mkdir -p  /var/log/zou
