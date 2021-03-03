@@ -25,6 +25,7 @@ ENV DOMAIN_NAME            localhost
 ENV DOMAIN_PROTOCOL        https
 ENV ENABLE_JOB_QUEUE       True
 ENV PREVIEW_FOLDER         /opt/zou/previews
+ENV APPS                   gunicorn,gunicorn-event,rq
 
 RUN apk add --no-cache \
     bash \
