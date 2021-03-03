@@ -24,6 +24,7 @@ ENV MAIL_DEFAULT_SENDER    NULL
 ENV DOMAIN_NAME            localhost
 ENV DOMAIN_PROTOCOL        https
 ENV ENABLE_JOB_QUEUE       True
+ENV PREVIEW_FOLDER         /opt/zou/previews
 
 RUN apk add --no-cache \
     bash \
@@ -58,7 +59,7 @@ ADD nginx.conf /etc/nginx/http.d/default.conf
 # setup supervisor
 RUN mkdir -p  /var/log/zou
 ADD supervisord.conf /etc/supervisord.conf
-ADD gunicorn /etc/zou/gunicorn.conf
+ADD gunicorn.conf /etc/zou/gunicorn.conf
 ADD gunicorn-events /etc/zou/gunicorn-events.conf
 
 EXPOSE 80
