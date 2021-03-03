@@ -25,8 +25,8 @@ echo "Gunicorn active ? $GUNICORN_ACTIVE"
 echo "Nginx active    ? $NGINX_ACTIVE"
 echo "Event active    ? $GUNICORN_EVENT_ACTIVE"
 echo "RQ active       ? $RQ_ACTIVE"
-sed -i "s/GUNICORN_ACTIVE/$GUNICORN_ACTIVE/g" /etc/zou/gunicorn.conf
-sed -i "s/NGINX_ACTIVE/$NGINX_ACTIVE/g" /etc/zou/gunicorn.conf
-sed -i "s/GUNICORN_EVENT_ACTIVE/$GUNICORN_EVENT_ACTIVE/g" /etc/zou/gunicorn.conf
-sed -i "s/RQ_ACTIVE/$RQ_ACTIVE/g" /etc/zou/gunicorn.conf
+sed -i "s/GUNICORN_ACTIVE/$GUNICORN_ACTIVE/g" /etc/supervisord.conf
+sed -i "s/NGINX_ACTIVE/$NGINX_ACTIVE/g" /etc/supervisord.conf
+sed -i "s/GUNICORN_EVENT_ACTIVE/$GUNICORN_EVENT_ACTIVE/g" /etc/supervisord.conf
+sed -i "s/RQ_ACTIVE/$RQ_ACTIVE/g" /etc/supervisord.conf
 supervisord -c /etc/supervisord.conf
