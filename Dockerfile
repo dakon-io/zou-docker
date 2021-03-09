@@ -1,4 +1,5 @@
 FROM alpine:latest
+MAINTAINER Fanani M. Ihsan <fanani.mi@gmail.com>
 
 ENV WORKERS                3
 ENV TIMEOUT                60
