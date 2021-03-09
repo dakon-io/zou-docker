@@ -60,5 +60,6 @@ Create Container
 -e MAIL_DEFAULT_SENDER=your_email_username \
 -e DOMAIN_NAME=example.com \
 -e DOMAIN_PROTOCOL=[http/https] \
+-e APPS=gunicorn,gunicorn-event,rq \
 <IMAGE_ID>
 ~~~~
