@@ -36,7 +36,6 @@ RUN apk add --no-cache \
     ffmpeg \
     python3 \
     py-pip \
-    py-pip \
     build-base \
     python3-dev \
     postgresql-dev \
